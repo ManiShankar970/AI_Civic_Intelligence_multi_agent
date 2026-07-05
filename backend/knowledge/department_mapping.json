@@ -1,0 +1,71 @@
+{
+    "garbage": {
+        "department_id": "SAN001",
+        "department_name": "Sanitation Department",
+        "email": "sanitation@example.gov",
+        "queue": "sanitation_queue",
+        "default_status": "Pending",
+        "sla_hours": 24,
+        "escalation_after": 48
+    },
+
+    "pothole": {
+        "department_id": "ROAD001",
+        "department_name": "Road Maintenance Department",
+        "email": "roadmaintenance@example.gov",
+        "queue": "roadmaintenance_queue",
+        "default_status": "Pending",
+        "sla_hours": 48,
+        "escalation_after": 72
+    },
+
+    "road_damage": {
+        "department_id": "ROAD002",
+        "department_name": "Road Maintenance Department",
+        "email": "roadmaintenance@example.gov",
+        "queue": "roadmaintenance_queue",
+        "default_status": "Pending",
+        "sla_hours": 48,
+        "escalation_after": 72
+    },
+
+    "streetlight_fault": {
+        "department_id": "ELEC001",
+        "department_name": "Electricity Department",
+        "email": "electricity@example.gov",
+        "queue": "electricity_queue",
+        "default_status": "Pending",
+        "sla_hours": 24,
+        "escalation_after": 48
+    },
+
+    "water_leakage": {
+        "department_id": "WATER001",
+        "department_name": "Water Supply Department",
+        "email": "watersupply@example.gov",
+        "queue": "watersupply_queue",
+        "default_status": "Pending",
+        "sla_hours": 24,
+        "escalation_after": 48
+    },
+
+    "open_drainage": {
+        "department_id": "DRAIN001",
+        "department_name": "Drainage Department",
+        "email": "drainage@example.gov",
+        "queue": "drainage_queue",
+        "default_status": "Pending",
+        "sla_hours": 48,
+        "escalation_after": 72
+    },
+
+    "streetlight_failure": {
+        "department_id": "ELEC002",
+        "department_name": "Electrical Department",
+        "email": "electrical@example.gov",
+        "queue": "electrical_queue",
+        "default_status": "Pending",
+        "sla_hours": 24,
+        "escalation_after": 48
+    }
+}

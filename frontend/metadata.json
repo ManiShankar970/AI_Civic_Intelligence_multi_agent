@@ -1,0 +1,6 @@
+{
+  "name": "AI Civic Intelligence Platform",
+  "description": "Smarter civic complaint management powered by Artificial Intelligence, Multi-Agent Systems, and Workflow Automation.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

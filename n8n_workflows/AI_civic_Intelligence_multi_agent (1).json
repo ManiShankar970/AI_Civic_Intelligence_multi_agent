@@ -1,0 +1,721 @@
+{
+  "name": "AI_civic_Intelligence_multi_agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-complaint",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -272,
+        64
+      ],
+      "id": "4d06eaba-ffe3-4d8a-b19f-686c580e2156",
+      "name": "Webhook",
+      "webhookId": "c569db7c-60c4-41c9-99f3-88dffa3afac1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/generate-complaint",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "image",
+              "inputDataFieldName": "image"
+            },
+            {
+              "name": "description",
+              "value": "={{ $json.body.description }}"
+            },
+            {
+              "name": "latitude",
+              "value": "={{ $json.body.latitude }}"
+            },
+            {
+              "name": "longitude",
+              "value": "={{ $json.body.longitude }}"
+            },
+            {
+              "name": "address",
+              "value": "={{ $json.body.address }}"
+            },
+            {
+              "name": "landmark",
+              "value": "={{ $json.body.landmark }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -64,
+        64
+      ],
+      "id": "9a20e719-5eec-4d4c-8b14-4fb65a387e92",
+      "name": "HTTP Request",
+      "retryOnFail": true,
+      "maxTries": 2
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "1KThrsPvSCINBzqu",
+          "mode": "list",
+          "cachedResultName": "information",
+          "cachedResultUrl": "/projects/2yJ0JLDBcT0XrT7m/datatables/1KThrsPvSCINBzqu"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Complaint_id": "={{$json.complaint_id}}a",
+            "Timestamp": "={{$now}}",
+            "Issue": "={{$json.issue_type}}",
+            "Severity": "={{$json.severity}}",
+            "Department": "={{$json.department}}",
+            "Summary": "={{$json.summary}}",
+            "Complaint": "={{$json.complaint}}",
+            "Latitude": "={{$json.latitude}}",
+            "Status": "={{$json.status}}",
+            "Longitude": "={{$json.longitude}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Complaint_id",
+              "displayName": "Complaint_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Issue",
+              "displayName": "Issue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Severity",
+              "displayName": "Severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Complaint",
+              "displayName": "Complaint",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Latitude",
+              "displayName": "Latitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Longitude",
+              "displayName": "Longitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        64
+      ],
+      "id": "8554f40a-bb19-4150-952e-cfe175bbf8e5",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "get-department",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        352
+      ],
+      "id": "a46f265a-5fff-43d0-9252-39b4c221fa4e",
+      "name": "Webhook1",
+      "webhookId": "5b7f576c-6a05-4338-a032-f42ffdbbea19"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "1KThrsPvSCINBzqu",
+          "mode": "list",
+          "cachedResultName": "information",
+          "cachedResultUrl": "/projects/2yJ0JLDBcT0XrT7m/datatables/1KThrsPvSCINBzqu"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Department",
+              "keyValue": "={{ $json.body.params.department }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        352
+      ],
+      "id": "50a1c688-9caa-41b5-b9dc-07b821bb2606",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item=>{\n\nreturn{\n\njson:{\n\nid:item.json.Complaint_id,\n\nissueType:item.json.Issue,\n\ndescription:item.json.Complaint,\n\nseverity:item.json.Severity,\n\ndepartment:item.json.Department,\n\nstatus:item.json.Status,\n\ndate:item.json.Timestamp,\n\nimage:\"\",\n\nlocation:{\n\naddress:\"\",\n\nlat:item.json.Latitude,\n\nlng:item.json.Longitude\n\n}\n\n}\n\n}\n\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        352
+      ],
+      "id": "90673f4f-af3c-4397-afbd-26c732e42827",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        256,
+        352
+      ],
+      "id": "a34ca577-45d7-4647-ba0a-93f718a6193f",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "content": "Department Complaints API",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -720,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "6a06bdf2-aa7d-45d4-b9a7-623b03275d4e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "AI civic intelligence",
+        "height": 80,
+        "width": 160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -688,
+        112
+      ],
+      "typeVersion": 1,
+      "id": "fb3542a9-666c-4498-a5cf-e317b91e0f08",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "update-status",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        688
+      ],
+      "id": "d8672742-3a37-47e6-8e35-a4a2579bc8ca",
+      "name": "Webhook2",
+      "webhookId": "8c1d4575-e7a0-4280-9252-8628c173f3e7"
+    },
+    {
+      "parameters": {
+        "content": "Department Status Update",
+        "height": 80,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -720,
+        720
+      ],
+      "typeVersion": 1,
+      "id": "cc031b9d-8da8-4bbb-ae04-af2046b4856e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "1KThrsPvSCINBzqu",
+          "mode": "list",
+          "cachedResultName": "information",
+          "cachedResultUrl": "/projects/2yJ0JLDBcT0XrT7m/datatables/1KThrsPvSCINBzqu"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Complaint_id",
+              "keyValue": "={{ $json.body.complaint_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.body.status }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Complaint_id",
+              "displayName": "Complaint_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Issue",
+              "displayName": "Issue",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Severity",
+              "displayName": "Severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Department",
+              "displayName": "Department",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Complaint",
+              "displayName": "Complaint",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Latitude",
+              "displayName": "Latitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Longitude",
+              "displayName": "Longitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        688
+      ],
+      "id": "f1ae9d3f-07f4-498e-8312-f6d252b3db0c",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        32,
+        688
+      ],
+      "id": "bc37fbcb-4018-4225-8df3-d81f8f144eeb",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{$input.first().json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        352,
+        64
+      ],
+      "id": "5bfaaae6-4d99-4130-94b0-b63e7f63e250",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "track-status",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -384,
+        928
+      ],
+      "id": "8fd6bccd-d232-4d51-9a9b-491491fed4d3",
+      "name": "Webhook3",
+      "webhookId": "f1323738-11ed-49d5-8a81-c4968797b6e9"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "1KThrsPvSCINBzqu",
+          "mode": "list",
+          "cachedResultName": "information",
+          "cachedResultUrl": "/projects/2yJ0JLDBcT0XrT7m/datatables/1KThrsPvSCINBzqu"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Complaint_id",
+              "keyValue": "={{ $json.body.complaint_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        928
+      ],
+      "id": "98ce3747-0f17-4271-8dae-dd16cb6d47d4",
+      "name": "Get row(s)1"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        240,
+        944
+      ],
+      "id": "9e2c9725-6409-42fa-86f9-4a8523e203f4",
+      "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\nconst row = item.json;\n\nreturn {\n\njson:{\n\nid: row.Complaint_id,\n\nissueType: row.Issue,\n\ndescription: row.Complaint,\n\nseverity: row.Severity,\n\ndepartment: row.Department,\n\nstatus: row.Status,\n\ncreatedAt: row.Timestamp,\n\nlocation:{\n\naddress:\"\",\n\nlat:Number(row.Latitude),\n\nlng:Number(row.Longitude)\n\n},\n\ntimeline:[\n\n{\nstatus:\"Submitted\",\ntimestamp:row.Timestamp,\ndescription:\"Complaint Submitted\",\nisCompleted:true\n},\n\n{\nstatus:\"Accepted\",\ntimestamp:\"\",\ndescription:\"Department Accepted\",\nisCompleted:row.Status===\"Accepted\"||row.Status===\"In Progress\"||row.Status===\"Inspection\"||row.Status===\"Completed\"\n},\n\n{\nstatus:\"In Progress\",\ntimestamp:\"\",\ndescription:\"Work Started\",\nisCompleted:row.Status===\"In Progress\"||row.Status===\"Inspection\"||row.Status===\"Completed\"\n},\n\n{\nstatus:\"Inspection\",\ntimestamp:\"\",\ndescription:\"Inspection Running\",\nisCompleted:row.Status===\"Inspection\"||row.Status===\"Completed\"\n},\n\n{\nstatus:\"Completed\",\ntimestamp:\"\",\ndescription:\"Complaint Completed\",\nisCompleted:row.Status===\"Completed\"\n}\n\n],\n\nhistory:[\n\n{\naction:row.Status,\ndate:row.Timestamp,\nuser:row.Department,\nnotes:\"Updated by department\"\n}\n\n]\n\n}\n\n};\n\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        16,
+        928
+      ],
+      "id": "f85136b6-7897-4a85-9be0-eb7365c935d1",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook2": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook3": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "390f5994-cf2d-44d1-a8d2-f2ad1f3cfeed",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9b7c181043218339cddd8479172e19f8a9b3308360d7fdb443dd4ab8ce833cd8"
+  },
+  "id": "2Jpt0JuhFV4LG5mn",
+  "tags": []
+}
